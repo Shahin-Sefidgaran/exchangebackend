@@ -1,0 +1,5 @@
+auth_temp_token_namespace = "auth.temp_token"
+auth_mail_codes_namespace = "auth.mail.codes"
+auth_userinfo_namespace = "auth.user.info"
+notification_temp_token_namespace = "notif.temp_token"
+notification_message_namespace = "notif.msg"

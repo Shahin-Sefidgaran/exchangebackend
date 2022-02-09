@@ -1,0 +1,15 @@
+install these packages:
+-fastapi with his friends
+-bcrypt package as mentioned in fastapi website
+-pydantic with email validator
+-asyncpg
+-sqlalchemy
+-celery worker
+-flush redis
+-install mongo (optional)
+-turn off db echo
+-uncomment rate limiter redis storage
+-enable 2fa on .env
+-read logs
+-fastapi-mail
+-add redis storage for throttler

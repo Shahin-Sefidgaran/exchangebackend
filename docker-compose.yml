@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+  #REDIS
+  redis:
+    container_name: redis
+    image: redis:alpine
+    command: redis-server
+    restart: always
+  
+  #POSTGRES
+  db:
+    image: postgres
+    container_name: pgdb
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - 5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./db/create_database1.sql:/docker-entrypoint-initdb.d/create_database1.sql
+      - ./db/create_database2.sql:/docker-entrypoint-initdb.d/create_database2.sql
+
+  #PGADMIN
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@root.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
+    restart: always
+
+  #SERVICES
+  services_sigloy:
+    build: ./services_sigloy
+    container_name: services_sigloy
+    volumes:
+      - ./services_sigloy:/app
+    expose:
+      - 8080
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+      - REDIS_URL=redis://redis
+    # for makin migration:
+    #   docker exec -it sigloy_services_sigloy bash
+    #   python exec.py migrate
+    # run below command for testing migration:
+    command: bash -c "
+      python exec.py migrate --seed
+      && python main.py"
+    #command: python main.py
+    restart: always
+    depends_on:
+      - db
+      - redis
+    
+  #CORE
+  core_interface_sigloy:
+    build: ./core_interface_sigloy
+    container_name: core_sigloy
+    volumes:
+      - ./core_interface_sigloy:/app
+    expose:
+      - 8000
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - REDIS_URL=redis://redis
+    # for making migration:
+    #   docker exec -it sigloy_core_interface_sigloy bash
+    #   python exec.py migrate
+    # run below command for testing migration:
+    command: bash -c "
+      python exec.py migrate --seed
+      && python main.py"
+    #command: python main.py
+    restart: always
+    depends_on:
+      - db
+      - redis
+      - services_sigloy
+
+  #SEPARATE_RUNNERS(SERVICES)
+  services_celery_worker:
+    container_name: services_celery_worker
+    build: ./services_sigloy
+    command: python separate_runners.py
+    restart: always
+    volumes:
+      - ./services_sigloy:/usr/src/services_sigloy
+    depends_on:
+      - services_sigloy
+
+  #SEPARATE_RUNNERS(CORE)
+  core_celery_worker:
+    container_name: core_celery_worker
+    build: ./core_interface_sigloy
+    command: python separate_runners.py
+    restart: always
+    volumes:
+      - ./core_interface_sigloy:/usr/src/core_interface_sigloy
+    depends_on:
+      - core_interface_sigloy
+
+  #NGINX & REACT:
+  sigloy_react:
+    container_name: react_sigloy
+    build: ./build
+    ports:
+      - 80:80
+    depends_on:
+      - db
+      - core_interface_sigloy
+      - services_sigloy
+  
+volumes:
+  db:
+  services_sigloy:
+  core_interface_sigloy:

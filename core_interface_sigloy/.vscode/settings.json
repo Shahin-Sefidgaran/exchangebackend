@@ -1,0 +1,14 @@
+{
+  "python.pythonPath": "venv/bin/python",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "sqlite-sigloy",
+      "database": "sqlite.db"
+    }
+  ],
+  "cSpell.ignoreWords": [
+    "self"
+  ]
+}

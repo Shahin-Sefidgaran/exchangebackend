@@ -1,0 +1,13 @@
+install these packages:
+-fastapi with it's friends
+-aiohttp[speedups]
+-run with gunicorn
+-number of workers should be (cpu cores x 2)+1
+-run seperate runner
+-aioredis == 2.0.0a1
+-flushdb redis manually
+-aiofiles
+-run celery worker for logging
+-turn off sqlalchemy echo
+-set allowed hosts (ips of the main server)
+-read logs

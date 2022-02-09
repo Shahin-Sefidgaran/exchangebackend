@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e148c72e.chunk.css",
+    "main.js": "/static/js/main.e4c3f7d0.chunk.js",
+    "main.js.map": "/static/js/main.e4c3f7d0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c9bec3a8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c9bec3a8.js.map",
+    "static/css/2.6e9fce59.chunk.css": "/static/css/2.6e9fce59.chunk.css",
+    "static/js/2.a7e61bbe.chunk.js": "/static/js/2.a7e61bbe.chunk.js",
+    "static/js/2.a7e61bbe.chunk.js.map": "/static/js/2.a7e61bbe.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.6e9fce59.chunk.css.map": "/static/css/2.6e9fce59.chunk.css.map",
+    "static/css/main.e148c72e.chunk.css.map": "/static/css/main.e148c72e.chunk.css.map",
+    "static/js/2.a7e61bbe.chunk.js.LICENSE.txt": "/static/js/2.a7e61bbe.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/BYagut.01103de0.ttf",
+    "static/media/IranNastaliq.32e9d4e9.ttf": "/static/media/IranNastaliq.32e9d4e9.ttf",
+    "static/media/LogIn-SignIn.css": "/static/media/Lightly-Sailler-dafont.d3fab8b3.otf",
+    "static/media/MarketList.css": "/static/media/Meramoon_demo.c5ab98fc.otf",
+    "static/media/Trade.scss": "/static/media/Nimbus-Sans-D-OT-Ultra-Light_32757.8a196780.ttf",
+    "static/media/walletOverview.scss": "/static/media/The-Outbox-St.3a126eca.ttf",
+    "static/media/homePage.css": "/static/media/headerImage.618badf4.png",
+    "static/media/photo_2021-06-30_11-38-49.6b29352d.jpg": "/static/media/photo_2021-06-30_11-38-49.6b29352d.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c9bec3a8.js",
+    "static/css/2.6e9fce59.chunk.css",
+    "static/js/2.a7e61bbe.chunk.js",
+    "static/css/main.e148c72e.chunk.css",
+    "static/js/main.e4c3f7d0.chunk.js"
+  ]
+}
